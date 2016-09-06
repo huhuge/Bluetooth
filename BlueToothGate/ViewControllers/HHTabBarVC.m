@@ -13,9 +13,15 @@
 #import "HHMyVC.h"
 #import "HHOpenGateVC.h"
 #import "HHButton.h"
+#import <CoreMotion/CoreMotion.h>
+#import <AudioToolbox/AudioToolbox.h>
+#import "StaticBlueComplete.h"
+#import <CoreBluetooth/CoreBluetooth.h>
 
 @interface HHTabBarVC (){
     UIView *myView;
+    StaticBlueComplete *_blue;
+
 }
 
 
@@ -28,6 +34,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self initBlueTooth];
+
     [self setUpTabViewControllers];
 //    NSLog(@"%s",__func__);
 //    NSLog(@"%@",self.view.subviews); //能打印出所有子视图,和其frame
@@ -130,7 +139,19 @@
 #pragma mark ---openAction---======================================
 - (void)openGate{
     kLog(@"open gate");
+//    [_blue begin];
+
 }
+
+#pragma mark ---initBlueTooth---======================================
+- (void)initBlueTooth{
+//    _blue = [[StaticBlueComplete alloc]init];
+//    _blue.cardName = @"A0000000";
+//    _blue.searchError = @"未找到设备";
+//    _blue.searching = @"正在开门，请稍等";
+//    _blue.blueName = @"E00001";
+}
+
 
 #pragma mark ---安装子视图控制器
 - (void)setUpTabViewControllers{

@@ -17,8 +17,9 @@
 @implementation HHLoginVC
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
 }
 
 #pragma mark ---登录---=====================================

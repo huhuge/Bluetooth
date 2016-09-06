@@ -27,9 +27,9 @@
 
 
 //**************账号相关************************//
-#define HHAccount     @"account"//账号
-#define HHPsaaword    @"password"//密码
-#define HHLoginStatus @"loginStatus"//登录状态
+#define HHUser_info_Account     @"account"//账号
+#define HHUser_info_Psaaword    @"password"//密码
+#define HHUser_LoginStatus      @"loginStatus"//登录状态
 
 
 //**************颜色相关************************//

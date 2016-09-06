@@ -145,7 +145,7 @@
 - (IBAction)selectType:(UIButton *)sender {
     [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(_TFRepairType.frame.origin.x, _TFRepairType.frame.origin.y+30+64, _TFRepairType.frame.size.width, 60) selectData:@[@"水管维修",@"网络维修"] action:^(NSInteger index) {
         
-        kLog(@"%d",index);
+        kLog(@"%ld",(long)index);
         _TFRepairType.text = _typeArray[index];
         
     } animated:YES];

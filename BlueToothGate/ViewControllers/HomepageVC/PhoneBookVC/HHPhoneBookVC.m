@@ -90,13 +90,13 @@
     UILabel *lab  = [[UILabel alloc]initWithFrame:CGRectMake(25, 10, 100, 30)];
     lab.font      = [UIFont systemFontOfSize:13];
     lab.textColor = [UIColor blackColor];
-    lab.text      = [NSString stringWithFormat:@"第%d个选项",section];
+    lab.text      = [NSString stringWithFormat:@"第%ld个选项",(long)section];
     [headerView addSubview:lab];
     
     UILabel *lab1  = [[UILabel alloc]initWithFrame:CGRectMake(ScreenW - 50, 10, 50, 30)];
     lab1.font      = [UIFont systemFontOfSize:13];
     lab1.textColor = [UIColor blackColor];
-    lab1.text      = [NSString stringWithFormat:@"%d/%d",[_sectionArray[section] count],[_sectionArray[section]count]];
+    lab1.text      = [NSString stringWithFormat:@"%lu/%lu",(unsigned long)[_sectionArray[section] count],(unsigned long)[_sectionArray[section]count]];
     [headerView addSubview:lab1];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];

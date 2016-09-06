@@ -103,6 +103,8 @@
 		CA34F16A1D78083700E52267 /* QBSlomoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA34F15B1D78083700E52267 /* QBSlomoIconView.m */; };
 		CA34F16B1D78083700E52267 /* QBVideoIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA34F15D1D78083700E52267 /* QBVideoIconView.m */; };
 		CA34F16C1D78083700E52267 /* QBVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA34F15F1D78083700E52267 /* QBVideoIndicatorView.m */; };
+		CA372A4F1D7EB96C00C90BA8 /* HHMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CA372A4D1D7EB96C00C90BA8 /* HHMessageVC.m */; };
+		CA372A501D7EB96C00C90BA8 /* HHMessageVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA372A4E1D7EB96C00C90BA8 /* HHMessageVC.xib */; };
 		CA3CE3BA1D6696D1007CF315 /* img1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA3CE3B51D6696D1007CF315 /* img1.jpg */; };
 		CA3CE3BB1D6696D1007CF315 /* img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA3CE3B61D6696D1007CF315 /* img2.jpg */; };
 		CA3CE3BC1D6696D1007CF315 /* img3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CA3CE3B71D6696D1007CF315 /* img3.jpg */; };
@@ -423,6 +425,9 @@
 		CA34F15E1D78083700E52267 /* QBVideoIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QBVideoIndicatorView.h; sourceTree = "<group>"; };
 		CA34F15F1D78083700E52267 /* QBVideoIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBVideoIndicatorView.m; sourceTree = "<group>"; };
 		CA34F1601D78083700E52267 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/QBImagePicker.strings"; sourceTree = "<group>"; };
+		CA372A4C1D7EB96C00C90BA8 /* HHMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHMessageVC.h; sourceTree = "<group>"; };
+		CA372A4D1D7EB96C00C90BA8 /* HHMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHMessageVC.m; sourceTree = "<group>"; };
+		CA372A4E1D7EB96C00C90BA8 /* HHMessageVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HHMessageVC.xib; sourceTree = "<group>"; };
 		CA3CE3B51D6696D1007CF315 /* img1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img1.jpg; sourceTree = "<group>"; };
 		CA3CE3B61D6696D1007CF315 /* img2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img2.jpg; sourceTree = "<group>"; };
 		CA3CE3B71D6696D1007CF315 /* img3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img3.jpg; sourceTree = "<group>"; };
@@ -892,6 +897,16 @@
 			path = QBImagePicker;
 			sourceTree = "<group>";
 		};
+		CA372A4B1D7EB94700C90BA8 /* MessageVC */ = {
+			isa = PBXGroup;
+			children = (
+				CA372A4C1D7EB96C00C90BA8 /* HHMessageVC.h */,
+				CA372A4D1D7EB96C00C90BA8 /* HHMessageVC.m */,
+				CA372A4E1D7EB96C00C90BA8 /* HHMessageVC.xib */,
+			);
+			path = MessageVC;
+			sourceTree = "<group>";
+		};
 		CA3CE3BF1D66970F007CF315 /* SDWebImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,6 +1280,7 @@
 		CA7052251D62E95000A7C2E0 /* HomepageVC */ = {
 			isa = PBXGroup;
 			children = (
+				CA372A4B1D7EB94700C90BA8 /* MessageVC */,
 				CA3193CD1D6FDC0B002A69AB /* SecondHandVC */,
 				CAAA2C191D6EE41600CB0447 /* HelpPayVC */,
 				CAAA2C061D6EC44C00CB0447 /* PhoneBookVC */,
@@ -1752,6 +1768,7 @@
 				CAF208611D6BF005001FB31A /* X-in12.png in Resources */,
 				CAAA2C1E1D6EE45700CB0447 /* HHHelpPayVC.xib in Resources */,
 				CA3463951D7529C80080597E /* x-guanzhu3.png in Resources */,
+				CA372A501D7EB96C00C90BA8 /* HHMessageVC.xib in Resources */,
 				CA7052521D62EC8C00A7C2E0 /* HHMyVC.xib in Resources */,
 				20D2C9881D6EF3A0008B0094 /* MyCommunityViewController.xib in Resources */,
 				20D2C9601D6ECBED008B0094 /* X-mian9.png in Resources */,
@@ -1859,6 +1876,7 @@
 				CA3CE4041D669733007CF315 /* TAPageControl.m in Sources */,
 				CA3CE3E61D66970F007CF315 /* SDWebImageDownloader.m in Sources */,
 				CAAA2BFA1D6E8E8500CB0447 /* HHSelectCommunityVC.m in Sources */,
+				CA372A4F1D7EB96C00C90BA8 /* HHMessageVC.m in Sources */,
 				CA4DE1CA1D66FF0A00FBDDB6 /* MJRefreshStateHeader.m in Sources */,
 				CA22CA041D6AF6D40077E8A2 /* HHNoticeDetailVC.m in Sources */,
 				CA3CE3EB1D66970F007CF315 /* UIImage+GIF.m in Sources */,
@@ -2088,6 +2106,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueToothGate/huhu.pch";
 				INFOPLIST_FILE = BlueToothGate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -2105,6 +2125,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/BlueToothGate/huhu.pch";
 				INFOPLIST_FILE = BlueToothGate/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
