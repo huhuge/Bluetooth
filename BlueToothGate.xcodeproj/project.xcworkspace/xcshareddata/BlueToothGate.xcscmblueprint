@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++1093",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++3569" : {
+
+    },
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++1093" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++3569" : 0,
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++1093" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "D25C848C-4E02-4DDB-BC39-BDCB32D194AB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++3569" : "",
+    "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++1093" : "BlueToothGate\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "BlueToothGate",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "BlueToothGate.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/123.57.16.134\/svn\/wyapp",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++1093"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/123.57.16.134\/svn\/wyapp",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "a40b69d4-1dbb-854c-b2a1-a3398a0c75df++3569"
+    }
+  ]
+}

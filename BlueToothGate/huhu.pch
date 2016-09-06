@@ -1,0 +1,76 @@
+//
+//  huhu.pch
+//  BlueToothGate
+//
+//  Created by JeroMac on 16/8/16.
+//  Copyright © 2016年 hu. All rights reserved.
+//
+
+#ifndef huhu_h
+#define huhu_h
+
+
+//**************服务器相关************************//
+///正式服务器
+//#define API_URL_BASE @"http://192.168.1.171/app/"
+
+///测试服务器
+#define API_URL_BASE @"http://192.168.1.33/app/"
+
+
+
+
+
+//**************接口相关************************//
+#define CorpListUrl @"load_app_propertyCorp.htm"
+
+
+
+//**************账号相关************************//
+#define HHAccount     @"account"//账号
+#define HHPsaaword    @"password"//密码
+#define HHLoginStatus @"loginStatus"//登录状态
+
+
+//**************颜色相关************************//
+#define kRGBColor(r,g,b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
+#define HHThemeColor      [UIColor colorWithRed:(254)/255.0 green:(93)/255.0 blue:(62)/255.0 alpha:1.0]
+#define HHBackGroundColor [UIColor colorWithRed:(231)/255.0 green:(231)/255.0 blue:(231)/255.0 alpha:1.0]
+
+
+//**************屏幕尺寸相关************************//
+#define ScreenW [UIScreen mainScreen].bounds.size.width
+#define ScreenH [UIScreen mainScreen].bounds.size.height
+
+
+//**************打印相关************************//
+#define kLog(fmt,...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__);
+
+
+//**************请求相关************************//
+#import "Singleton.h"
+
+#import "HYHttp.h"
+
+#import "MBProgressHUD.h"
+
+#import "ShowMessage.h"
+
+#import "AFNetWorking.h"
+
+#import "UIImageView+WebCache.h"
+
+//**************通用类相关************************//
+#import "MJRefresh.h"
+
+#import "PellTableViewSelect.h"
+
+#import "AppDelegate.h"
+
+#import "QBImagePickerController.h"
+
+
+
+
+
+#endif /* huhu_h */

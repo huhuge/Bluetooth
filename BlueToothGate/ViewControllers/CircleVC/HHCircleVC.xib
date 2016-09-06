@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HHCircleVC">
+            <connections>
+                <outlet property="tableView" destination="DVT-I9-OtR" id="P3L-OW-E1b"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YVE-j5-RK6" userLabel="navView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jVy-j9-p9y">
+                            <rect key="frame" x="126" y="25" width="68" height="33"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="业主大厅">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsImageWhenHighlighted" value="NO"/>
+                            </userDefinedRuntimeAttributes>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Fh-Zo-6xK">
+                            <rect key="frame" x="284" y="32" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="kuS-gu-VId"/>
+                                <constraint firstAttribute="height" constant="20" id="zXe-UF-vGu"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="X-in08.png"/>
+                            <connections>
+                                <action selector="turnToPublic:" destination="-1" eventType="touchUpInside" id="oQd-tH-aOE"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.99607843139999996" green="0.36470588240000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="jVy-j9-p9y" firstAttribute="centerX" secondItem="YVE-j5-RK6" secondAttribute="centerX" id="OEp-C9-5mt"/>
+                        <constraint firstAttribute="height" constant="64" id="cDG-En-LqF"/>
+                        <constraint firstAttribute="trailing" secondItem="4Fh-Zo-6xK" secondAttribute="trailing" constant="16" id="dFp-gc-gkI"/>
+                        <constraint firstItem="jVy-j9-p9y" firstAttribute="centerY" secondItem="YVE-j5-RK6" secondAttribute="centerY" constant="10" id="mei-RN-a2g"/>
+                        <constraint firstItem="4Fh-Zo-6xK" firstAttribute="top" secondItem="YVE-j5-RK6" secondAttribute="top" constant="32" id="sNO-zO-mSz"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DVT-I9-OtR">
+                    <rect key="frame" x="0.0" y="64" width="320" height="366"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="YVE-j5-RK6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="WTz-5S-Uya"/>
+                <constraint firstItem="DVT-I9-OtR" firstAttribute="top" secondItem="YVE-j5-RK6" secondAttribute="bottom" id="agb-fJ-cV8"/>
+                <constraint firstAttribute="bottom" secondItem="DVT-I9-OtR" secondAttribute="bottom" constant="50" id="llF-aC-DFs"/>
+                <constraint firstItem="DVT-I9-OtR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="m48-ua-zjc"/>
+                <constraint firstItem="YVE-j5-RK6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="o3L-tw-KUU"/>
+                <constraint firstAttribute="trailing" secondItem="DVT-I9-OtR" secondAttribute="trailing" id="tzd-yM-UyR"/>
+                <constraint firstAttribute="trailing" secondItem="YVE-j5-RK6" secondAttribute="trailing" id="wUG-tf-D16"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="X-in08.png" width="39" height="39"/>
+    </resources>
+</document>

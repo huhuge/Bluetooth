@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HHNoticeVC">
+            <connections>
+                <outlet property="tableView" destination="qQX-Kd-Yky" id="3uA-r4-k3h"/>
+                <outlet property="topSeg" destination="KNe-9J-97y" id="CYp-it-fKx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1nG-Ie-gMe" userLabel="navView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="x3r-Ko-P1O">
+                            <rect key="frame" x="15" y="32" width="12" height="19"/>
+                        </imageView>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="KNe-9J-97y">
+                            <rect key="frame" x="88" y="28" width="145" height="29"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="145" id="GPe-eD-EvO"/>
+                                <constraint firstAttribute="height" constant="28" id="sRv-w5-R11"/>
+                            </constraints>
+                            <segments>
+                                <segment title="物业公告"/>
+                                <segment title="小区新闻"/>
+                            </segments>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="selectMessageType:" destination="-1" eventType="valueChanged" id="Jb1-kd-BlY"/>
+                            </connections>
+                        </segmentedControl>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VeU-ir-RNc">
+                            <rect key="frame" x="-8" y="10" width="71" height="64"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="m9E-1S-vDd"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.99607843139999996" green="0.36470588240000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="KNe-9J-97y" firstAttribute="centerX" secondItem="1nG-Ie-gMe" secondAttribute="centerX" id="SsP-60-0hp"/>
+                        <constraint firstAttribute="bottom" secondItem="KNe-9J-97y" secondAttribute="bottom" constant="8" id="feJ-JW-0JA"/>
+                        <constraint firstAttribute="height" constant="64" id="oGJ-cG-4Gg"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qQX-Kd-Yky">
+                    <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="qQX-Kd-Yky" secondAttribute="bottom" id="2p7-qw-V7q"/>
+                <constraint firstItem="qQX-Kd-Yky" firstAttribute="top" secondItem="1nG-Ie-gMe" secondAttribute="bottom" id="95E-ok-Kom"/>
+                <constraint firstItem="1nG-Ie-gMe" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Anb-az-gS1"/>
+                <constraint firstItem="qQX-Kd-Yky" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="K1j-H9-UMl"/>
+                <constraint firstItem="1nG-Ie-gMe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="KDe-eM-u6P"/>
+                <constraint firstAttribute="trailing" secondItem="qQX-Kd-Yky" secondAttribute="trailing" id="ZfH-ZU-7oM"/>
+                <constraint firstAttribute="trailing" secondItem="1nG-Ie-gMe" secondAttribute="trailing" id="eDd-6Y-Aam"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="229" y="304"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.png" width="24" height="38"/>
+    </resources>
+</document>

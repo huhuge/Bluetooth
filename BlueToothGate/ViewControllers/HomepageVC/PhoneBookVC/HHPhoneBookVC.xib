@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HHPhoneBookVC">
+            <connections>
+                <outlet property="tableView" destination="LdJ-fw-eiR" id="Gqj-gs-PkO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3We-ob-63B" userLabel="navView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="arrow.png" translatesAutoresizingMaskIntoConstraints="NO" id="iiw-mz-DtP">
+                            <rect key="frame" x="15" y="32" width="12" height="19"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Kx-Uw-clt">
+                            <rect key="frame" x="-8" y="10" width="71" height="64"/>
+                            <connections>
+                                <action selector="backAction:" destination="-1" eventType="touchUpInside" id="ewz-Qz-NB2"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电话簿" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VMa-BB-9Mj">
+                            <rect key="frame" x="109" y="31" width="101" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="fGl-AS-5ih"/>
+                                <constraint firstAttribute="width" constant="101" id="vcZ-h7-ugQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.99607843139999996" green="0.36470588240000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="VMa-BB-9Mj" secondAttribute="bottom" constant="12" id="aqQ-r7-kUp"/>
+                        <constraint firstAttribute="height" constant="64" id="dn1-he-fDe"/>
+                        <constraint firstItem="VMa-BB-9Mj" firstAttribute="centerX" secondItem="3We-ob-63B" secondAttribute="centerX" id="k8e-im-wEq"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="LdJ-fw-eiR">
+                    <rect key="frame" x="0.0" y="68" width="320" height="412"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="LdJ-fw-eiR" secondAttribute="trailing" id="38z-S8-bMS"/>
+                <constraint firstAttribute="bottom" secondItem="LdJ-fw-eiR" secondAttribute="bottom" id="Et4-vt-YJU"/>
+                <constraint firstItem="LdJ-fw-eiR" firstAttribute="top" secondItem="3We-ob-63B" secondAttribute="bottom" constant="4" id="KMo-xC-1ni"/>
+                <constraint firstItem="LdJ-fw-eiR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NKn-bK-oZs"/>
+                <constraint firstItem="3We-ob-63B" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ORp-VB-gO2"/>
+                <constraint firstItem="3We-ob-63B" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YDN-i5-VQY"/>
+                <constraint firstAttribute="trailing" secondItem="3We-ob-63B" secondAttribute="trailing" id="rQY-Cu-o0l"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="arrow.png" width="24" height="38"/>
+    </resources>
+</document>
