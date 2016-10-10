@@ -12,4 +12,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *TFType;
 
+@property (nonatomic, strong) NSMutableArray *typeArray;
+@property (nonatomic, strong) NSMutableArray *displayArray;
+
+
 @end

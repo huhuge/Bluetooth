@@ -22,5 +22,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *IDCardLabel;
 
+@property (nonatomic, strong) NSDictionary *BaseDic;
+@property (nonatomic, strong) NSDictionary *ProtrDic;
 
 @end

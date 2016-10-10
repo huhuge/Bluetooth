@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface IDCardViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *IDTF;
 
 @end

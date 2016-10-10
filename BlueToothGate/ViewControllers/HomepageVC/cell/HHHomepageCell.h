@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HHHomepageModel.h"
 
 @interface HHHomepageCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIView *backView;
@@ -15,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labNowPrice;
 @property (weak, nonatomic) IBOutlet UILabel *labOriginPrice;
 @property (weak, nonatomic) IBOutlet UILabel *labSalt;
+
+- (void)setCellDataWithModel:(HHHomepageModel *)model;
 
 @end

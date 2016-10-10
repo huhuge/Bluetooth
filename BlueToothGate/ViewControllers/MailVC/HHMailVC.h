@@ -10,4 +10,11 @@
 
 @interface HHMailVC : UIViewController
 
+//@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
+@property (nonatomic, assign) NSInteger VCMark;
+
+
+@property (nonatomic, strong) NSArray *titleARR;
+
 @end

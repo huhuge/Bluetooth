@@ -14,6 +14,8 @@ typedef void (^valueChangeBlock)(NSString *string);
 @property (weak, nonatomic) IBOutlet UIButton *addImg_one;
 @property (weak, nonatomic) IBOutlet UIButton *addImg_two;
 @property (weak, nonatomic) IBOutlet UIButton *addImg_three;
+@property (weak, nonatomic) IBOutlet UITextView *TFcontent;
+@property (weak, nonatomic) IBOutlet UITextField *TFtitle;
 
 @property(nonatomic, copy)valueChangeBlock block;
 

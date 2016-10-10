@@ -9,7 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @interface HHNoticeDetailVC : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *labTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labTime;
+@property (weak, nonatomic) IBOutlet UILabel *labScans;
+@property (weak, nonatomic) IBOutlet UITextView *TVcontent;
 
-@property (weak, nonatomic) IBOutlet UIWebView *noticeWeb;
+@property (nonatomic, strong) NSString *titleStr;
+@property (nonatomic, strong) NSString *timeStr;
+@property (nonatomic, strong) NSString *scanStr;
+@property (nonatomic, strong) NSString *contentStr;
+
 
 @end

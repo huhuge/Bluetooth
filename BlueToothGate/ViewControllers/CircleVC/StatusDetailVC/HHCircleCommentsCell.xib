@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="22" id="KGk-i7-Jjw" customClass="HHCircleCommentsCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="22"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <frame key="frameInset" width="320" height="21"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYD-3V-XAA" userLabel="commentView">
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iXT-fg-WMX">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="DOW-6g-trz"/>
+                                    <constraint firstAttribute="width" constant="38" id="RYP-oc-CoC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="哈哈">
+                                    <color key="titleColor" red="0.99607843139999996" green="0.36470588240000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RN1-aq-t1P">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="38" id="iO5-re-0Ix"/>
+                                    <constraint firstAttribute="height" constant="20" id="lut-eR-8HU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="哈哈">
+                                    <color key="titleColor" red="0.99607843139999996" green="0.36470588240000001" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="回复" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-pj-uIc">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="P0p-sE-ev2"/>
+                                    <constraint firstAttribute="height" constant="20" id="qqt-hx-WQm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sdfsadfsadfasdfsadfasdfasdfasdfasdfasdfasdfsd" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tz6-ZR-STT">
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="igK-5t-T2L"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.90588235289999997" green="0.90588235289999997" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="RN1-aq-t1P" firstAttribute="top" secondItem="YYD-3V-XAA" secondAttribute="top" constant="1" id="CIr-Sx-i6A"/>
+                            <constraint firstItem="fHY-pj-uIc" firstAttribute="leading" secondItem="YYD-3V-XAA" secondAttribute="leading" constant="43" id="ErD-2G-u9P"/>
+                            <constraint firstItem="iXT-fg-WMX" firstAttribute="top" secondItem="YYD-3V-XAA" secondAttribute="top" constant="1" id="FWa-6P-lxK"/>
+                            <constraint firstItem="iXT-fg-WMX" firstAttribute="leading" secondItem="YYD-3V-XAA" secondAttribute="leading" id="Ihw-qn-IbV"/>
+                            <constraint firstItem="fHY-pj-uIc" firstAttribute="top" secondItem="YYD-3V-XAA" secondAttribute="top" id="LxB-ve-Ddr"/>
+                            <constraint firstItem="Tz6-ZR-STT" firstAttribute="leading" secondItem="YYD-3V-XAA" secondAttribute="leading" constant="119" id="UFZ-sI-cJX"/>
+                            <constraint firstItem="RN1-aq-t1P" firstAttribute="leading" secondItem="fHY-pj-uIc" secondAttribute="trailing" constant="2" id="YUL-OI-ubj"/>
+                            <constraint firstItem="Tz6-ZR-STT" firstAttribute="top" secondItem="YYD-3V-XAA" secondAttribute="top" constant="3" id="fTr-pQ-gGX"/>
+                            <constraint firstAttribute="trailing" secondItem="Tz6-ZR-STT" secondAttribute="trailing" id="hsD-KC-YFU"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="YYD-3V-XAA" secondAttribute="bottom" constant="1" id="KHn-d1-oBx"/>
+                    <constraint firstItem="YYD-3V-XAA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="75" id="Ztn-Vf-5aR"/>
+                    <constraint firstAttribute="trailing" secondItem="YYD-3V-XAA" secondAttribute="trailing" constant="15" id="cEX-6h-67v"/>
+                    <constraint firstItem="YYD-3V-XAA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="usG-Ej-b30"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="btnSendName" destination="iXT-fg-WMX" id="U1c-WF-X9C"/>
+                <outlet property="btnTrueName" destination="RN1-aq-t1P" id="dxx-u8-Hme"/>
+                <outlet property="contentHeight" destination="igK-5t-T2L" id="VdS-je-LgY"/>
+                <outlet property="contentLabX" destination="UFZ-sI-cJX" id="hQ0-IT-nur"/>
+                <outlet property="labContent" destination="Tz6-ZR-STT" id="uPo-ax-v90"/>
+                <outlet property="labReply" destination="fHY-pj-uIc" id="aYF-UQ-auN"/>
+                <outlet property="replyLabX" destination="ErD-2G-u9P" id="B4u-69-goG"/>
+                <outlet property="sendNameWidth" destination="RYP-oc-CoC" id="edK-Ru-Cgp"/>
+                <outlet property="trueNameWidth" destination="iO5-re-0Ix" id="fw4-aI-Jle"/>
+            </connections>
+            <point key="canvasLocation" x="25" y="71"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -10,4 +10,16 @@
 
 @implementation HHNoticeModel
 
+-(void)setValue:(id)value forUndefinedKey:(nonnull NSString *)key{
+    if ([key isEqualToString:@"id"]) {
+        [self setValue:value forKey:@"myID"];
+        //        self.myID = value;
+    }
+}
+
+-(id)valueForUndefinedKey:(NSString *)key{
+    return nil;
+}
+
+
 @end

@@ -9,9 +9,12 @@
 #import "HHRepairListVC.h"
 #import "HHRepairCell.h"
 #import "HHRepairDetailVC.h"
+#import "HHRepairTypeModel.h"
+#import "HHRepairListModel.h"
 
 @interface HHRepairListVC ()<UITableViewDelegate,UITableViewDataSource>{
-    NSArray *_typeArray;
+    NSInteger _flag;
+    NSMutableArray *_dataArray;
 }
 
 @end
@@ -27,17 +30,23 @@
     [self setUI];
     
     [self initTabView];
+    
+    [self getRepairListWhitTypeID:@""];
 }
 
 #pragma mark ---Data---======================================
 - (void)setData{
-    _typeArray = [[NSArray alloc]initWithObjects:@"水管维修",@"网络维修", nil];
+    _dataArray = [NSMutableArray new];
 }
 
 #pragma mark ---initUI---======================================
 - (void)setUI{
     _TFType.layer.borderColor = kRGBColor(228, 228, 228).CGColor;
     _TFType.layer.borderWidth = 0.5;
+    if (_displayArray.count) {
+        _TFType.text = _displayArray[0];
+    }
+    
 }
 
 #pragma mark ---initTab---======================================
@@ -59,8 +68,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 10;
-    //    return _dataArray.count;
+//    return 10;
+    return _dataArray.count;
     
 }
 
@@ -75,35 +84,72 @@
         cell = [[HHRepairCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
         
     }
+    HHRepairListModel *model = _dataArray[indexPath.row];
+    [cell setDataWithModel:model];
     
-    //    ReceivableModel *model = [_dataArray objectAtIndex:indexPath.section];
-    //    cell.labCompanyName.text = [NSString stringWithFormat:@"%@",model.pharmacyName];
-    //    cell.labBackMoney.text   = [NSString stringWithFormat:@"本次回款总额%@",model.paymentAmount];
-    //    cell.labTime.text        = [NSString stringWithFormat:@"时间：%@",model.paymentTime];
-    //    cell.labMonth.text       = [NSString stringWithFormat:@"本月合计总金额：%@",model.paymentAmountTotalMonth];
-    //    cell.labYear.text        = [NSString stringWithFormat:@"本年合计总金额%@",model.paymentAmountTotalYear];
-    //    cell.selectionStyle      = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     kLog(@"%ld",(long)indexPath.row);
+    HHRepairListModel *model = _dataArray[indexPath.row];
+
     HHRepairDetailVC *nextVC = [HHRepairDetailVC new];
+    nextVC.model             =  model;
     [self.navigationController pushViewController:nextVC animated:YES];
     
     
 }
 
 #pragma mark ---选择类型---=====================================
-
 - (IBAction)selectType:(UIButton *)sender {
-    [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(_TFType.frame.origin.x, _TFType.frame.origin.y+30+64, _TFType.frame.size.width, 60) selectData:_typeArray action:^(NSInteger index) {
+    [PellTableViewSelect addPellTableViewSelectWithWindowFrame:CGRectMake(_TFType.frame.origin.x, _TFType.frame.origin.y+30+64, _TFType.frame.size.width, 120) selectData:_displayArray action:^(NSInteger index) {
         
-        _TFType.text = _typeArray[index];
-        kLog(@"%ld",(long)index);
+        _TFType.text = _displayArray[index];
+        _flag = index;
         
     } animated:YES];
 
+}
+
+#pragma mark ---查询---=====================================
+- (IBAction)searchAction:(UIButton *)sender {
+    
+    HHRepairTypeModel *model = _typeArray[_flag];
+    [self getRepairListWhitTypeID:model.myID];
+
+}
+
+#pragma mark ---获取列表---======================================
+- (void)getRepairListWhitTypeID:(NSString *)idString{
+    
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    NSString *ID = [NSString stringWithFormat:@"%@",idString];
+    if (ID.length != 0) {
+        [param setObject:idString forKey:@"repairTypeId"];
+    }
+    [param setObject:[[NSUserDefaults standardUserDefaults] objectForKey:HHUser_info_userID] forKey:@"userId"];
+    
+    [[HYHttp sharedHYHttp]POST:GetRepairApplyUrl parameters:param success:^(id  _Nonnull responseObject) {
+//        kLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"success"] integerValue] == 1) {
+            [_dataArray removeAllObjects];
+            NSDictionary *obj = [responseObject objectForKey:@"obj"];
+            NSArray *rows     = [obj objectForKey:@"rows"];
+            
+            for (NSDictionary *dic in rows) {
+                HHRepairListModel *model = [HHRepairListModel new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_dataArray addObject:model];
+            }
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        kLog(@"fail");
+    }];
+    
+    
 }
 
 #pragma mark ---back---=====================================

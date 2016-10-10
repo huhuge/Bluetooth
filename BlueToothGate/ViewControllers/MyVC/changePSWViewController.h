@@ -9,5 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface changePSWViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *oldTF;
 
+@property (weak, nonatomic) IBOutlet UITextField *NewTF;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *SecondNewTF;
 @end

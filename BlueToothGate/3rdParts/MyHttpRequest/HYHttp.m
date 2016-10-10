@@ -11,6 +11,14 @@
 #import "AFNetworking.h"
 #import "HYPicModel.h"
 
+
+#import "AFNetworking.h"
+#import <CommonCrypto/CommonHMAC.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <netdb.h>
+#import <arpa/inet.h>
+
+
 @implementation HYHttp
 
 
@@ -290,7 +298,6 @@ singleton_implementation(HYHttp)// 单例实现
     manager.requestSerializer.timeoutInterval = (self.timeoutInterval ? self.timeoutInterval : 20);
     manager.requestSerializer = [AFHTTPRequestSerializer serializer]; // 请求不使用AFN默认转换,保持原有数据
     manager.responseSerializer = [AFHTTPResponseSerializer serializer]; // 响应不使用AFN默认转换,保持原有数据
-    
     [manager POST:[self setStringBaseUrl:URLString] parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         NSString *fileName = [NSString stringWithFormat:@"%@.jpg", picModle.picName];
@@ -378,6 +385,9 @@ singleton_implementation(HYHttp)// 单例实现
 
 
 
+
+
+
 #pragma mark - 拼接BaseUrl
 /**
  * 拼接BaseURL
@@ -387,5 +397,7 @@ singleton_implementation(HYHttp)// 单例实现
     NSString *str_url = [API_URL_BASE stringByAppendingString:urlString];
     return str_url;
 }
+
+
 
 @end

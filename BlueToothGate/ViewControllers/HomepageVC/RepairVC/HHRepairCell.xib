@@ -31,16 +31,16 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjL-CG-u3Q">
-                        <rect key="frame" x="83" y="51" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已完成" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QjL-CG-u3Q">
+                        <rect key="frame" x="83" y="51" width="47" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="gL7-qb-NJz"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-8-23" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ln5-jX-0ET">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016-8-23" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ln5-jX-0ET">
                         <rect key="frame" x="227" y="5" width="85" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="85" id="MWq-Qg-QcC"/>
@@ -61,7 +61,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="QjL-CG-u3Q" secondAttribute="trailing" constant="195" id="5Gt-K1-LQ0"/>
+                    <constraint firstAttribute="trailing" secondItem="QjL-CG-u3Q" secondAttribute="trailing" constant="190" id="5Gt-K1-LQ0"/>
                     <constraint firstAttribute="trailingMargin" secondItem="NqI-zT-IBQ" secondAttribute="trailing" constant="93" id="8UO-gW-4Aw"/>
                     <constraint firstItem="ln5-jX-0ET" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="9Wb-px-Slq"/>
                     <constraint firstItem="QjL-CG-u3Q" firstAttribute="top" secondItem="NqI-zT-IBQ" secondAttribute="bottom" constant="2" id="Mv6-xV-Ud9"/>
@@ -76,6 +76,13 @@
                     <constraint firstItem="NqI-zT-IBQ" firstAttribute="top" secondItem="T6Q-IG-Sj9" secondAttribute="bottom" constant="2" id="yYy-sn-arT"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="headImgVie" destination="id3-gg-JpR" id="Dja-u5-pOj"/>
+                <outlet property="labHouse" destination="T6Q-IG-Sj9" id="9Z8-Nv-7Z6"/>
+                <outlet property="labRepairType" destination="NqI-zT-IBQ" id="1f4-7G-t0s"/>
+                <outlet property="labStatus" destination="QjL-CG-u3Q" id="XeF-A5-NZG"/>
+                <outlet property="labTime" destination="ln5-jX-0ET" id="N32-g6-eIF"/>
+            </connections>
             <point key="canvasLocation" x="224" y="218"/>
         </tableViewCell>
     </objects>

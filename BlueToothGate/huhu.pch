@@ -11,26 +11,187 @@
 
 
 //**************服务器相关************************//
+//是否包含app前缀
+#define appPre @"app/"
+
 ///正式服务器
-//#define API_URL_BASE @"http://192.168.1.171/app/"
+#define API_URL_BASE @"http://192.168.1.171:8081/NCWY/"
 
-///测试服务器
-#define API_URL_BASE @"http://192.168.1.33/app/"
+///霍礼服务器
+//#define API_URL_BASE @"http://192.168.1.33/"
 
+//王兴荣服务器
+//#define API_URL_BASE  @"http://192.168.1.55:8080/"
 
-
-
+//传图片地址
+#define UploadImageUrl  @"app/uploadImg.htm"
 
 //**************接口相关************************//
-#define CorpListUrl @"load_app_propertyCorp.htm"
+///商城入口
+#define MarketEnterenceUrl  @"shopping_login.htm?"
+
+//收货地址
+#define getGoodsAddress    [NSString stringWithFormat:@"%@goods_appAddrQuery.htm",appPre]
+#define NewADDGoodsAddress    [NSString stringWithFormat:@"%@appAddress_add.htm",appPre]
+#define EditorGoodsAddress    [NSString stringWithFormat:@"%@appAddress_edit.htm",appPre]
+#define DeleteGoodsAddress    [NSString stringWithFormat:@"%@appAddress_del.htm",appPre]
+
+#define GetUserHouseInfoUrl    [NSString stringWithFormat:@"%@load_app_userHouseInfo.htm",appPre]
+
+///2.1物业公司列表
+#define CorpListUrl    [NSString stringWithFormat:@"%@load_app_propertyCorp.htm",appPre]
+///2.2获取小区列表
+#define GetCommunityListUrl    [NSString stringWithFormat:@"%@load_app_residentialInfo.htm",appPre]
+///2.3获取楼栋信息
+#define GetBuildingInfoListUrl    [NSString stringWithFormat:@"%@load_app_buildingInfo.htm",appPre]
+///2.4获取业主入住认证信息列表
+//#define GetUserHouseInfoUrl    [NSString stringWithFormat:@"%@load_app_userHouseInfo.htm",appPre]
+///2.5获取缴费详情
+#define GetPayDetailInfoUrl    [NSString stringWithFormat:@"%@load_app_userProxyRec.htm",appPre]
+///2.6获取缴费类型列表(基础数据)
+#define GetPayTypeInfoUrl    [NSString stringWithFormat:@"%@load_app_userBindProxy.htm",appPre]
+///2.7获取报修类型列表
+#define GetRepairTypeUrl    [NSString stringWithFormat:@"%@load_app_propertyRepairType.htm",appPre]
+///2.8获取报修申请列表
+#define GetRepairApplyUrl    [NSString stringWithFormat:@"%@load_app_propertyRepairTypeApply.htm",appPre]
+///2.9业主认证信息申请
+#define CheckUserHouseInfoUrl    [NSString stringWithFormat:@"%@save_app_userHouseInfo.htm",appPre]
+///2.10代缴费申请
+#define HelpPayApplyUrl    [NSString stringWithFormat:@"%@save_app_userProxyRecApply.htm",appPre]
+///2.11获取绑定缴费类型列表
+#define GetPayTypeUrl    [NSString stringWithFormat:@"%@load_app_proxyPayType.htm",appPre]
+///2.12绑定缴费类型
+#define BindPayTypeUrl    [NSString stringWithFormat:@"%@save_app_userBindProxy.htm",appPre]
+///2.13检查手机是否注册
+#define CheckRegisterUrl    [NSString stringWithFormat:@"%@check_user_tel.htm",appPre]
+///2.14发送短信验证码
+#define GetCaptchaUrl    [NSString stringWithFormat:@"%@send_sms.htm",appPre]
+///2.15 注册
+#define RegisterUrl    [NSString stringWithFormat:@"%@region_app_user.htm",appPre]
+///2.16 登录
+#define LoginUrl       [NSString stringWithFormat:@"%@login_user.htm",appPre]
+///2.17 报修申请
+#define RepairApplyUrl    [NSString stringWithFormat:@"%@save_app_propertyRepairTypeApply.htm",appPre]
+///2.18 获取地址三级联动
+#define GetAddressLinkUrl    [NSString stringWithFormat:@"%@locad_app_address.htm",appPre]
+
+///2.20	获取小区的商家信息
+#define GetCommunityMerchantUrl    [NSString stringWithFormat:@"%@load_area_store.htm",appPre]
+///2.21	获取业主小区商家的推广商品信息
+#define GetCommunityRecommendUrl    [NSString stringWithFormat:@"%@load_recommend_byuser.htm",appPre]
+///2.22	获取店铺信息
+#define GetShopInfoUrl    [NSString stringWithFormat:@"%@load_store_info.htm",appPre]
+///2.23	获取店铺广告（轮播图片）信息
+#define GetADsUrl    [NSString stringWithFormat:@"%@load_store_ad.htm",appPre]
+///2.24	获取店铺商品列表信息
+#define GetStopGoodsListUrl    [NSString stringWithFormat:@"%@load_store_goods.htm",appPre]
+///2.25	获取商品基本信息
+#define GetGoodBaseInfoListUrl    [NSString stringWithFormat:@"%@load_goods_base.htm",appPre]
+///2.26	获取商品详情
+#define GetGoodDetailInfoListUrl    [NSString stringWithFormat:@"%@load_goods_detail.htm",appPre]
+///2.27	添加商品到购物车
+#define AddToShopingCartUrl    [NSString stringWithFormat:@"%@add_goods_appCart.htm",appPre]
+///2.28	将商品移除购物车
+#define RemoveFromShopingCartUrl    [NSString stringWithFormat:@"%@remove_goods_appCart.htm",appPre]
+///2.29	提交（生成）订单
+#define MakeOrderUrl    [NSString stringWithFormat:@"%@submit_order.htm",appPre]
+///2.30	付款
+#define PayForOrderUrl    [NSString stringWithFormat:@"%@pay_order.htm",appPre]
+
+///2.31	App首页商品推介
+#define HomeGoodsRecommendUrl    [NSString stringWithFormat:@"%@goods_recommend.htm",appPre]
+///2.32	App商品分类
+#define MarketGoodsClassUrl    [NSString stringWithFormat:@"%@store_goods_class.htm",appPre]
+///2.33	App商城分类下的商品
+#define MarketGoodsUnderClassUrl    [NSString stringWithFormat:@"%@shopping_goods_class.htm",appPre]
+///2.34	App首页轮播信息（图片）
+#define HomeAdImageUrl    [NSString stringWithFormat:@"%@app_ad_image.htm",appPre]
+///2.35	App首页轮播信息（文字)
+#define HomeAdTextUrl    [NSString stringWithFormat:@"%@app_ad_text.htm",appPre]
+
+///2.36	获取个人信息
+#define GetUserInfoUrl    [NSString stringWithFormat:@"%@user_info.htm",appPre]
+///	获取个人订单列表
+#define GetUserOrderListUrl    [NSString stringWithFormat:@"%@user_order_list.htm",appPre]
+/// 修改个人信息
+#define UpdataUserInfoUrl    [NSString stringWithFormat:@"%@update_user_info.htm",appPre]
+#define UpdateMyProtrait    [NSString stringWithFormat:@"%@update_user_photo.htm",appPre]
+#define ChangePSW    [NSString stringWithFormat:@"%@update_user_password.htm",appPre]
+
+
+/// 社区公告
+#define GetAreaNoticeUrl    [NSString stringWithFormat:@"%@area_notice.htm",appPre]
+/// 系统通知
+#define GetSystemNoticeUrl    [NSString stringWithFormat:@"%@system_notice.htm",appPre]
+/// 通知详情（社区、系统）
+#define GetNoticeDetailUrl    [NSString stringWithFormat:@"%@notice_detail.htm",appPre]
+/// 电话簿
+#define GetPhoneBookUrl    [NSString stringWithFormat:@"%@load_app_Phonebook.htm",appPre]
+/// 发布二手（房租）信息（弃用）
+#define PublicSecondHandInfoUrl    [NSString stringWithFormat:@"%@release_sh_info.htm",appPre]
+/// 查看二手（租房）信息列表（弃用）
+#define SecondHandInfoListUrl    [NSString stringWithFormat:@"%@sh_list.htm",appPre]
+/// 查看二手（租房）信息详情（弃用）
+#define SecondHandDetailInfoListUrl    [NSString stringWithFormat:@"%@sh_detail.htm",appPre]
+/// 查看二手（租房）信息详情（弃用）
+#define SecondHandDetailInfoListUrl    [NSString stringWithFormat:@"%@sh_detail.htm",appPre]
+
+#define UpdateMyProtrait    [NSString stringWithFormat:@"%@update_user_photo.htm",appPre]
+
+/// 2.52 发布物业留言
+#define LeaveMessageUrl    [NSString stringWithFormat:@"%@addPropertyNotes.htm",appPre]
+/// 2.53 物业留言列表
+#define GetMessageListUrl    [NSString stringWithFormat:@"%@propertyNotesList.htm",appPre]
+/// 2.54 物业回复留言
+#define ReplyMessageUrl    [NSString stringWithFormat:@"%@propertyNotesReplyList.htm",appPre]
+
+
+/// 社区公告—物业公告
+#define CommunityNoticeListUrl    [NSString stringWithFormat:@"%@load_app_communityBulletinList.htm",appPre]
+/// 社区公告—小区新闻
+#define ResidentialBulletinListUrl    [NSString stringWithFormat:@"%@load_app_residentialBulletinList.htm",appPre]
+
+
+
+/// 3	二手商品—商品类型列表
+#define SecondHandGoodsTypeUrl    [NSString stringWithFormat:@"%@load_app_HandGoodsList.htm",appPre]
+/// 3.1	二手商品 --- 商品发布
+#define SecondHandGoodsPublicUrl    [NSString stringWithFormat:@"%@save_app_secondHandGoodsPublish.htm",appPre]
+/// 3.2	二手商品 - - 房屋出租发布
+#define HouseLeasePublishUrl    [NSString stringWithFormat:@"%@save_app_houseLeasePublish.htm",appPre]
+/// 3.3	二手商品 - - 获取房屋出租列表
+#define HouseLeaseListUrl    [NSString stringWithFormat:@"%@load_app_houseLeaseList.htm",appPre]
+/// 3.4	二手商品 - - 获取二手商品列表
+#define SecondHandListUrl    [NSString stringWithFormat:@"%@load_app_secondHandGoodsList.htm",appPre]
+/// 3.5	根据ID获取图片列表
+#define GetImageListUrl    [NSString stringWithFormat:@"%@load_app_imgList.htm",appPre]
+
+/// 3.6	删除房屋出租信息
+#define deleteMyFreeHouse    [NSString stringWithFormat:@"%@del_app_houseLease.htm",appPre]
+/// 3.7	删除二手商品
+#define deleteMyFreeGoods    [NSString stringWithFormat:@"%@del_app_secondHandGoods.htm",appPre]
+
+/// 3.9	 圈子 – 发布圈子
+#define PublicCircleUrl    [NSString stringWithFormat:@"%@save_app_communityCirclePublish.htm",appPre]
+/// 3.10 圈子 – 点赞
+#define SetLikeUrl    [NSString stringWithFormat:@"%@save_app_communityCircleFavorClick.htm",appPre]
+/// 3.11 圈子—评论
+#define CircleCommentUrl    [NSString stringWithFormat:@"%@save_app_communityCircleReply.htm",appPre]
+/// 3.12 圈子 – 评论聊天
+#define CommentReplyUrl    [NSString stringWithFormat:@"%@save_app_communityCircleReplyChat.htm",appPre]
+/// 3.13 圈子 – 列表
+#define CircleListUrl    [NSString stringWithFormat:@"%@load_app_communityCircleList.htm",appPre]
 
 
 
 //**************账号相关************************//
-#define HHUser_info_Account     @"account"//账号
-#define HHUser_info_Psaaword    @"password"//密码
-#define HHUser_LoginStatus      @"loginStatus"//登录状态
 
+#define HHUser_LoginStatus                @"loginStatus"    //登录状态
+#define HHUser_info_Account               @"account"        //账号
+#define HHUser_info_Psaaword              @"password"       //密码
+#define HHUser_info_userID                @"userID"         //userID
+#define HHUser_info_areaID                @"areaID"         //区域ID
+#define HHUser_info_selectedCommunity_dic @"selectCommunity"//选中小区
 
 //**************颜色相关************************//
 #define kRGBColor(r,g,b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
@@ -46,6 +207,15 @@
 //**************打印相关************************//
 #define kLog(fmt,...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__);
 
+#ifdef DEBUG
+
+#define NSSLog(FORMAT, ...) fprintf(stderr,"%s:%d\t%s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
+#else
+
+#define NSSLog(...)
+
+#endif
 
 //**************请求相关************************//
 #import "Singleton.h"
@@ -60,6 +230,7 @@
 
 #import "UIImageView+WebCache.h"
 
+#import "HYPicModel.h"
 //**************通用类相关************************//
 #import "MJRefresh.h"
 
@@ -68,6 +239,30 @@
 #import "AppDelegate.h"
 
 #import "QBImagePickerController.h"
+
+
+
+//**************通知相关************************//
+#define EnterMailNotification @"willEnterMail"
+
+
+//**************常用相关************************//
+
+//字符串是否为空
+#define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+//数组是否为空
+#define kArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0)
+//获取图片资源
+#define GetImage(imageName) [UIImage imageNamed:[NSString stringWithFormat:@"%@",imageName]]
+//占位图
+#define PlaceholderImage  @"placeholder"
+///userDefault
+#define userDefault [NSUserDefaults standardUserDefaults]
+
+
+
+
+
 
 
 

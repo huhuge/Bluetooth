@@ -10,4 +10,5 @@
 
 @interface NickViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *NickTF;
 @end

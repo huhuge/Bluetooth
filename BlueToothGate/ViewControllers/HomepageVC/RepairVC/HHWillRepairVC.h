@@ -11,6 +11,7 @@
 @interface HHWillRepairVC : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *TFRepairType;
+@property (weak, nonatomic) IBOutlet UITextField *TFHouse;
 @property (weak, nonatomic) IBOutlet UITextView *TVContent;
 @property (weak, nonatomic) IBOutlet UIButton *btnEnsure;
 @property (weak, nonatomic) IBOutlet UILabel *labPlacehoder;

@@ -9,6 +9,8 @@
 #import "HHCircleVC.h"
 #import "HHCircleCell.h"
 #import "HHPublicStatusVC.h"
+#import "HHStatusDetailVC.h"
+#import "HHCircleModel.h"
 
 BOOL isExercise;
 NSString *sex;
@@ -18,6 +20,16 @@ NSArray *testArray;
     NSMutableArray *_dataArray;
     NSMutableArray *_seleArray;
     HHPublicStatusVC *pvc;
+    
+    ///页码
+    int _pageNum;
+    ///加载下一页标志
+    BOOL _isLoadNext;
+    ///刷新标志
+    BOOL _isReLoad;
+    
+    
+
 }
 
 @end
@@ -26,8 +38,10 @@ NSArray *testArray;
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
     if (isExercise) {
 //        kLog(@"success");
+        [_tableView.mj_header beginRefreshing];
     }
     if (sex) {
 //        kLog(@"----%@-----",sex);
@@ -49,12 +63,99 @@ NSArray *testArray;
 
     [self initTabView];
     
+    [self initMJRefresh];
+    
 }
 
 #pragma mark ---setData---======================================
 - (void)setData{
     _dataArray = [NSMutableArray new];
     _seleArray = [NSMutableArray new];
+}
+
+#pragma mark ---初始化刷新控件
+- (void)initMJRefresh
+{
+    ///下拉刷新
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(reloadShowsPage)];
+    header.automaticallyChangeAlpha = YES;
+    header.lastUpdatedTimeLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    
+    ///上拉刷新
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadNextShowsPage)];
+    [_tableView.mj_header beginRefreshing];
+}
+
+#pragma mark ---刷新
+- (void)reloadShowsPage
+{
+    _pageNum = 0;
+    _isReLoad = YES;
+    
+    [self getCircleList];
+}
+
+#pragma mark ---加载下一页
+- (void)loadNextShowsPage
+{
+    _isLoadNext = YES;
+    _isReLoad=NO;
+    
+    [self getCircleList];
+}
+
+#pragma mark ---隐藏列表加载头或脚
+- (void)hideTableViewHeaderOrFooter
+{
+    if (_isLoadNext) {
+        _isLoadNext = NO;
+        [self.tableView.mj_footer endRefreshing];
+        
+    }else if(_isReLoad){
+        _isReLoad = NO;
+        [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:NO];
+        [self.tableView.mj_header endRefreshing];
+    }
+}
+
+
+
+#pragma mark ---获取列表---======================================
+- (void)getCircleList{
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    NSDictionary *info = [userDefault dictionaryForKey:HHUser_info_selectedCommunity_dic];
+    
+    [param setObject:[info objectForKey:@"residentialInfoId"] forKey:@"residentialInfoId"];
+    [param setObject:[NSString stringWithFormat:@"%d",_pageNum] forKey:@"currentPage"];
+    [[HYHttp sharedHYHttp]POST:CircleListUrl parameters:param success:^(id  _Nonnull responseObject) {
+        kLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"success"] integerValue] == 1) {
+            if (_isReLoad) {
+                [_dataArray removeAllObjects];
+            }
+            _pageNum++;
+
+            NSDictionary *obj = [responseObject objectForKey:@"obj"];
+            NSArray *rows = [obj objectForKey:@"rows"];
+            
+            if (rows.count == 0) {
+                [ShowMessage showTextOnly:@"没有更多数据" messageView:self.view];
+            }
+
+            for (NSDictionary *dic in rows) {
+                HHCircleModel *model = [HHCircleModel new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_dataArray addObject:model];
+            }
+            
+            [_tableView reloadData];
+        }
+        [self hideTableViewHeaderOrFooter];
+    } failure:^(NSError * _Nonnull error) {
+        [self hideTableViewHeaderOrFooter];
+
+    }];
 }
 
 #pragma mark ---initTab---======================================
@@ -66,7 +167,7 @@ NSArray *testArray;
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 5;
+    return _dataArray.count;
     
 }
 
@@ -82,12 +183,16 @@ NSArray *testArray;
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return 1;
-    //    return _dataArray.count;
     
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return  227;
+    
+    HHCircleModel *model = _dataArray[indexPath.section];
+    CGFloat height = [self getStringRect_:model.contents].height-18;
+    
+    return  175+height;
+
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -95,19 +200,10 @@ NSArray *testArray;
     HHCircleCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
     if (!cell) {
         cell = [[HHCircleCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
-        
     }
     
-    NSString *index = [NSString stringWithFormat:@"%ld",(long)indexPath.section];
-
-    [cell setDataWithModel:nil andisShowComment:[_seleArray containsObject:index]?YES:NO];
-    cell.btnComment.tag     = indexPath.section;
-    cell.btnPrise.tag       = indexPath.section;
-    cell.btnMakeComment.tag = indexPath.section;
-    
-    [cell.btnComment addTarget:self action:@selector(showFunctionView:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.btnPrise addTarget:self action:@selector(setPrize:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.btnMakeComment addTarget:self action:@selector(setComment:) forControlEvents:UIControlEventTouchUpInside];
+    HHCircleModel *model = _dataArray[indexPath.section];
+    [cell setDataWithModel:model];
     
     cell.selectionStyle      = UITableViewCellSelectionStyleNone;
     return cell;
@@ -115,7 +211,13 @@ NSArray *testArray;
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     kLog(@"%ld",(long)indexPath.section);
-  
+    
+    HHStatusDetailVC *nextVC = [HHStatusDetailVC new];
+    HHCircleModel *model     = _dataArray[indexPath.section];
+
+    nextVC.statusID   = model.myID;
+    nextVC.contentStr = model.contents;
+    [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 
@@ -156,5 +258,16 @@ NSArray *testArray;
     kLog(@"prize%ld",(long)sender.tag);
 
 }
+
+#pragma mark ---获取字符串的大小  ios6---======================================
+- (CGSize)getStringRect_:(NSString*)aString
+{
+    CGSize size = CGSizeMake(ScreenW-90,2000); //设置一个行高上限
+    NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:13]};
+    CGSize labelsize = [aString boundingRectWithSize:size options: NSStringDrawingUsesLineFragmentOrigin attributes:attribute context:nil].size;
+    
+    return  labelsize;
+}
+
 
 @end

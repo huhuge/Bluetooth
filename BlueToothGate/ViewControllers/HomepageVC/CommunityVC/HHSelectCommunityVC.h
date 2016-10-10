@@ -19,7 +19,7 @@
 
 @interface HHSelectCommunityVC : UIViewController
 
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @property (weak, nonatomic) IBOutlet UILabel *labCurrentSel;
 

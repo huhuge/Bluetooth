@@ -48,6 +48,8 @@ singleton_interface(HYHttp);// 单例声明
 
 
 
+
+
 /**
  *  网络监测(在什么网络状态)
  *
@@ -124,6 +126,8 @@ singleton_interface(HYHttp);// 单例声明
  *  @param failure         发送失败的回调
  */
 - (NSURLSessionDownloadTask *)downLoadWithURL:(NSString *)URLString progress:(Progress)progress destination:(Destination)destination downLoadSuccess:(DownLoadSuccess)downLoadSuccess failure:(Failure)failure;
+
+
 
 @end
 

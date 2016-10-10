@@ -15,6 +15,16 @@
     // Initialization code
 }
 
+- (IBAction)delegateCommunityBtn:(UIButton *)sender {
+    [self.delegate deleteCommunity];
+}
+
+- (IBAction)editorCommunityBtn:(UIButton *)sender {
+    [self.delegate editorCommunity:self.communityDic];
+}
+
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

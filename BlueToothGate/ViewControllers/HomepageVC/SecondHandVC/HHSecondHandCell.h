@@ -7,7 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "HHSecondHandModel.h"
 @interface HHSecondHandCell : UITableViewCell
+
+@property (weak, nonatomic) IBOutlet UIImageView *headImageView;
+@property (weak, nonatomic) IBOutlet UILabel *labTitle;
+@property (weak, nonatomic) IBOutlet UILabel *labTime;
+@property (weak, nonatomic) IBOutlet UILabel *labCommunity;
+@property (weak, nonatomic) IBOutlet UILabel *labGoodsName;
+@property (weak, nonatomic) IBOutlet UILabel *labDescription;
+
+@property (weak, nonatomic) IBOutlet UIImageView *image_one;
+@property (weak, nonatomic) IBOutlet UIImageView *image_two;
+@property (weak, nonatomic) IBOutlet UIImageView *image_thr;
+
+@property (weak, nonatomic) IBOutlet UIView  *goodView;
+@property (weak, nonatomic) IBOutlet UILabel *labGoodsPrice;
+@property (weak, nonatomic) IBOutlet UILabel *labNew;
+
+@property (weak, nonatomic) IBOutlet UIView *roomView;
+@property (weak, nonatomic) IBOutlet UILabel *labPrice;
+@property (weak, nonatomic) IBOutlet UILabel *labRent;
+
+- (void)setCellDataWithModel:(HHSecondHandModel *)model;
 
 @end

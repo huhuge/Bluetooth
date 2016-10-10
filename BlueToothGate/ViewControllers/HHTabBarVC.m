@@ -21,7 +21,9 @@
 @interface HHTabBarVC (){
     UIView *myView;
     StaticBlueComplete *_blue;
+    NSMutableArray *_btnArr;
 
+    NSArray *StoreArr;
 }
 
 
@@ -32,19 +34,39 @@
 
 @implementation HHTabBarVC
 
+
+- (void)getSpeciesOfGoods{
+    NSString *str = [NSString stringWithFormat:@"app/store_goods_class.htm"];
+    [[HYHttp sharedHYHttp] GET:str parameters:nil success:^(id  _Nonnull responseObject) {
+        NSLog(@"23%@", responseObject);
+        if ([responseObject[@"success"] intValue]) {
+            NSDictionary *objDic = responseObject[@"obj"];
+            StoreArr = objDic[@"rows"];
+            NSLog(@"554%lu", (unsigned long)StoreArr.count);
+            [self setUpTabViewControllers];
+           
+            
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        
+        NSLog(@"2343%@", error);
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self getSpeciesOfGoods];
     [self initBlueTooth];
 
-    [self setUpTabViewControllers];
+//    [self setUpTabViewControllers];
 //    NSLog(@"%s",__func__);
 //    NSLog(@"%@",self.view.subviews); //能打印出所有子视图,和其frame
   
     //删除现有的tabBar
     CGRect rect = self.tabBar.frame;
     [self.tabBar removeFromSuperview];  //移除TabBarController自带的下部的条
-    
+    _btnArr = [NSMutableArray new];
     //测试添加自己的视图
     myView = [[UIView alloc] init];
     myView.frame = rect;
@@ -100,7 +122,19 @@
 
     }
     
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(valueChanged:) name:EnterMailNotification object:nil];
+    
 }
+
+#pragma mark ---通知---======================================
+- (void)valueChanged:(NSNotification *)noti{
+    kLog(@"%@",noti.object);
+    UIButton *btn = [UIButton new];
+    btn.tag = 3;
+    [self clickBtn:btn];
+}
+
 
 - (void)clickBtn:(UIButton *)button {
     
@@ -108,6 +142,7 @@
         [self openGate];
         return;
     }
+    
     //1.先将之前选中的按钮设置为未选中
     self.selectedBtn.selected = NO;
     //2.再将当前按钮设置为选中
@@ -119,6 +154,21 @@
     
     NSArray *subViews = [myView subviews];
     NSMutableArray *labArr = [NSMutableArray new];
+    
+    if (button.tag == 3) {
+        for (int i=0; i<subViews.count; i++) {
+            if ([subViews[i] isKindOfClass:[UIButton class]]) {
+                [_btnArr addObject:subViews[i]];
+            }
+        }
+        for (UIButton *btn in _btnArr) {
+            if (btn.tag == 3) {
+                btn.selected = YES;
+                self.selectedBtn = btn;
+            }
+        }
+    }
+    
     for (int i = 0; i < subViews.count; i++) {
         if ([subViews[i] isKindOfClass:[UILabel class]]) {
             [labArr addObject:subViews[i]];
@@ -173,6 +223,7 @@
     
     HHMailVC *MVC = [[HHMailVC alloc]init];
     MVC.title = @"商城";
+    MVC.titleARR = StoreArr;
     UINavigationController *nav3 = [[UINavigationController alloc]initWithRootViewController:MVC];
     nav3.navigationBar.translucent = YES;
     

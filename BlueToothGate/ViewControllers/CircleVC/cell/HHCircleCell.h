@@ -27,10 +27,12 @@
 
 
 
-- (void)setDataWithModel:(HHCircleModel *)model andisShowComment:(BOOL)isShow;
+- (void)setDataWithModel:(HHCircleModel *)model;
 
 
 @property (nonatomic, readwrite) CGFloat rowHeight;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *imgDistance;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contHeight;
 
 @end

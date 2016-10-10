@@ -7,9 +7,12 @@
 //
 
 #import "HHSelectCommunityVC.h"
+#import "HHSelectCommunityCell.h"
+#import "HHSelectCommunityModel.h"
 
-@interface HHSelectCommunityVC ()<UICollectionViewDelegate,UICollectionViewDataSource>{
+@interface HHSelectCommunityVC ()<UITableViewDelegate,UITableViewDataSource>{
     NSMutableArray *_dataArray;
+    NSMutableArray *_orginArray;
 }
 
 @end
@@ -18,83 +21,95 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _dataArray = [[NSMutableArray alloc]initWithObjects:@"世纪新都",@"东和花园",@"计量综合楼",@"北城天界",@"南陈天骄",@"换了小区",@"什么小区",@"花卉园",@"红旗河沟",@"黄泥磅",@"江北的是吧",@"sm",@"神秘心情",@"哈哈", nil];
+    
+    [self setData];
+    
+    [self getCommunity];
+    
+    [self initTabView];
+    
+    
+}
+
+#pragma mark ---setData---======================================
+- (void)setData{
+    _dataArray = [NSMutableArray new];
+    _orginArray = [NSMutableArray new];
     _labCurrentSel.text =   [NSString stringWithFormat:@"当前选择：%@",_currentCommunity];
-    
-    [self setLayout];
-    
-    
-    
-}
-
-#pragma mark ---setLayout---======================================
-- (void)setLayout{
-    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(90, 50)];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    //    flowLayout.sectionInset = UIEdgeInsetsMake(0, 2, 0, 0);
-    [self.collectionView setCollectionViewLayout:flowLayout];
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"myCell"];
 
 }
 
-#pragma mark ---collection delegate---=====================================
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
-    
-    return 1;
-    
+#pragma mark ---initTab---======================================
+- (void)initTabView{
+    _tableView.delegate         = self;
+    _tableView.dataSource       = self;
+    _tableView.separatorStyle   = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HHSelectCommunityCell class]) bundle:nil] forCellReuseIdentifier:@"myCell"];
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _dataArray.count;
-    
 }
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *cellIdentifier = @"myCell";
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.0001;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 10.00001;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return  67;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    UILabel *label  = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 70, 30)];
-    label.text      = [NSString stringWithFormat:@"%@",_dataArray[indexPath.row]];
-    label.textColor = [UIColor blackColor];
-    label.font      = [UIFont systemFontOfSize:13];
-    label.textAlignment = NSTextAlignmentCenter;
-    cell.backgroundColor     = [UIColor whiteColor];
-    cell.layer.masksToBounds = YES;
-    cell.layer.cornerRadius  = 2;
-    
-    for (id subView in cell.contentView.subviews) {
-        [subView removeFromSuperview];
+    HHSelectCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
+    if (!cell) {
+        cell = [[HHSelectCommunityCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
     }
+    HHSelectCommunityModel *model = _dataArray[indexPath.section];
+    [cell setCellWithModel:model];
     
-    [cell.contentView addSubview:label];
-    return cell;
+      return cell;
 }
 
-//每个item之间的间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-
-//定义每个Section 的 margin
--(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, (ScreenW-270)/4, 0, (ScreenW-270)/4);//分别为上、左、下、右
-    //    return UIEdgeInsetsMake((ScreenW-300)/3, (ScreenW-300)/3, 0,0);//分别为
-}
-
-//选择了某个cell
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     kLog(@"%ld",(long)indexPath.row);
-    _labCurrentSel.text = [NSString stringWithFormat:@"当前选择：%@",_dataArray[indexPath.row]];
-    if ([self.delegate respondsToSelector:@selector(getCurrentCommunityString:)]) {
-        [self.delegate getCurrentCommunityString:_dataArray[indexPath.row]];
+    HHSelectCommunityModel *model = _dataArray[indexPath.section];
+    NSDictionary *dic             = _orginArray[indexPath.section];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:dic forKey:HHUser_info_selectedCommunity_dic];
+    
+    if (self.delegate) {
+        [self.delegate respondsToSelector:@selector(getCurrentCommunityString:)];
+        [self.delegate getCurrentCommunityString:model.residentialName];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    [self.navigationController popViewControllerAnimated:YES];
+}
 
+#pragma mark ---获取小区---======================================
+- (void)getCommunity{
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    [param setObject:[[NSUserDefaults standardUserDefaults] objectForKey:HHUser_info_userID] forKey:@"userId"];
+    [[HYHttp sharedHYHttp]POST:GetUserHouseInfoUrl parameters:param success:^(id  _Nonnull responseObject) {
+        kLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"success"] integerValue] == 1) {
+            NSDictionary *obj = [responseObject objectForKey:@"obj"];
+            NSArray *rows     = [obj objectForKey:@"rows"];
+            
+            for (NSDictionary *dic in rows) {
+                HHSelectCommunityModel *model = [HHSelectCommunityModel new];
+                [model setValuesForKeysWithDictionary:dic];
+                [_dataArray addObject:model];
+                [_orginArray addObject:dic];
+            }
+            [_tableView reloadData];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 - (IBAction)backAction:(UIButton *)sender {

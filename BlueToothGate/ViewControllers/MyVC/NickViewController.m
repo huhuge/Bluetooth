@@ -24,6 +24,22 @@
 }
 
 - (IBAction)nickSaveBtn:(UIButton *)sender {
+    NSMutableDictionary *mudic = [NSMutableDictionary new];
+    [mudic setObject:[[NSUserDefaults standardUserDefaults]objectForKey:HHUser_info_userID] forKey:@"id"];
+    [mudic setObject:self.NickTF.text forKey:@"trueName"];
+    [[HYHttp sharedHYHttp] POST:UpdataUserInfoUrl parameters:mudic success:^(id  _Nonnull responseObject) {
+        
+//        NSLog(@"888%@", responseObject);
+        if ([responseObject[@"success"] intValue]) {
+            [ShowMessage showTextOnly:responseObject[@"obj"] messageView:self.view];
+        }else{
+            [ShowMessage showTextOnly:responseObject[@"obj"] messageView:self.view];
+        }
+        
+        
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"444%@", error);
+    }];
     
 }
 

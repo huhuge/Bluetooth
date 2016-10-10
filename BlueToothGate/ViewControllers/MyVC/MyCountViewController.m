@@ -5,7 +5,7 @@
 //  Created by guobao on 16/8/23.
 //  Copyright © 2016年 hu. All rights reserved.
 //
-
+#import "HYHttp.h"
 #import "MyCountViewController.h"
 #import "NickViewController.h"
 #import "SexViewController.h"
@@ -16,16 +16,81 @@
 @interface MyCountViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UIImage *_selectedImage;
+    NSDictionary *ProtraitDic;
+    NSDictionary *BasicDic;
 }
 @end
 
 @implementation MyCountViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    // Do any additional setup after loading the view from its nib.
+- (void)viewWillAppear:(BOOL)animated{
+     [self getPersonInfo];
 }
+
+- (void)viewDidLoad {
+    BasicDic = [NSDictionary new];
+    ProtraitDic = [NSDictionary new];
+    [super viewDidLoad];
+    [self getPersonInfo];
+
+    
+}
+
+- (void)CreatUI{
+    NSString *ProtraitStr = [NSString stringWithFormat:@"%@%@/%@",API_URL_BASE,ProtraitDic[@"path"], ProtraitDic[@"name"]];
+    NSURL *url = [NSURL URLWithString:ProtraitStr];
+    UIImage * imgP = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
+    if (imgP) {
+        [self.protraitBtn setImage:imgP forState:UIControlStateNormal];
+    }else{
+        [self.protraitBtn setImage:[UIImage imageNamed:@"ic_account"] forState:UIControlStateNormal];
+    }
+    
+    
+    self.nickLabel.text = BasicDic[@"userName"];
+    if (BasicDic[@"sex"]) {
+        self.sexLabel.text = @"男";
+    }else{
+        self.sexLabel.text = @"女";
+    }
+    if ([BasicDic[@"birthday"] length]>10) {
+        NSString *birStr =[BasicDic[@"birthday"] substringToIndex:10];
+        self.dateLabel.text = birStr;
+    }else{
+        self.dateLabel.text = BasicDic[@"birthday"];
+        
+    }
+    
+    self.IDCardLabel.text = BasicDic[@"id_card"];
+
+}
+
+
+- (void)getPersonInfo{
+    NSUserDefaults *Defau = [NSUserDefaults standardUserDefaults];
+    NSString *userID = [Defau stringForKey:HHUser_info_userID];
+    NSMutableDictionary *mudic = [NSMutableDictionary dictionary];
+    [mudic setObject:userID forKey:@"userId"];
+    [[HYHttp sharedHYHttp] GET:GetUserInfoUrl parameters:mudic success:^(id  _Nonnull responseObject) {
+        //    NSLog(@"8888%@", responseObject);
+        if ([responseObject[@"success"] integerValue]) {
+            NSDictionary *dic = responseObject[@"obj"];
+            NSArray *baseArr = dic[@"userBase"];
+            BasicDic = baseArr[0];
+//            self.nameLabel.text = baseDic[@"userName"];
+            
+            NSArray *ProArr = dic[@"userPhoto"];
+            ProtraitDic = ProArr[0];
+//            NSString *ProtraitStr = [NSString stringWithFormat:@"%@%@/%@",API_URL_BASE,ProtraitDic[@"path"], ProtraitDic[@"name"]];
+            [self CreatUI];
+        }
+    } failure:^(NSError * _Nonnull error) {
+        NSLog(@"8888%@", error);
+    }];
+    
+    
+}
+
 
 
 - (IBAction)MyAccountBack:(UIButton *)sender {
@@ -70,47 +135,45 @@
    }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    _selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
+    NSData *imgData = UIImageJPEGRepresentation(_selectedImage, 0.5);
+     NSMutableDictionary *mudic = [NSMutableDictionary new];
+      [mudic setObject:[[NSUserDefaults standardUserDefaults]objectForKey:HHUser_info_userID] forKey:@"userId"];
     
- 
-        [picker dismissViewControllerAnimated:YES completion:^() {
-            _selectedImage = [info objectForKey:UIImagePickerControllerOriginalImage];
-            
-            [self.protraitBtn setImage:_selectedImage forState:UIControlStateNormal];
-            
-//            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//            [manager.requestSerializer setValue:@"image/png/jpeg/jpg"forHTTPHeaderField:@"Content-Type"];
-//            manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//            manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//            [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObjects:@"application/json",@"text/html",@"text/json",@"text/javascript",@"application/x-javascript", nil]];
-//            
-//            NSData *imageData = UIImageJPEGRepresentation(_selectedImage, 1);
-//            
-//            NSUserDefaults *userDeault = [NSUserDefaults standardUserDefaults];
-//            NSString *strId = [userDeault stringForKey:@"myId"];
-//            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-//            [dic setObject:strId forKey:@"userId"];
-//            //    NSLog(@"456%@", str);
-//            
-//            NSString *URLStr = [NSString stringWithFormat:@"%@headImage.action",kNetwork];
-//            [manager POST:URLStr parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-//                
-//                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//                formatter.dateFormat = @"yyyyMMddHHmmss";
-//                NSString *str = [formatter stringFromDate:[NSDate date]];
-//                NSString *fileName = [NSString stringWithFormat:@"%@.jpg", str];
-//                
-//                [formData appendPartWithFileData:imageData name:@"attachments" fileName:fileName mimeType:@"image/jpeg/file/png/jpg"];
-//                
-//            } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//                //                NSLog(@"344%@", responseObject);
-//                [self showHint:@"头像修改成功"];
-//            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//                NSLog(@"227%@",error);
-//            }];
-//            
-        }];
+        //[self saveImage:_selectedImage withName:@"currentImage.png"];
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    HYPicModel *model = [[HYPicModel alloc]init];
+    model.pic     = _selectedImage;
+    model.picData = imgData;
+    model.picName = @"appfile";
+    model.url     = fullPath;
     
-        [self dismissViewControllerAnimated:YES completion:nil];
+    [[HYHttp sharedHYHttp]POST:UploadImageUrl parameters:nil andPic:model progress:nil success:^(id  _Nonnull responseObject) {
+        responseObject = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingAllowFragments error:nil];
+        kLog(@"%@",responseObject);
+        if ([[responseObject objectForKey:@"success"] integerValue] == 1) {
+            NSDictionary *DIC = [responseObject objectForKey:@"obj"];
+            NSString *idStr = DIC[@"id"];
+            [mudic setObject:idStr forKey:@"saccId"];
+     [[HYHttp sharedHYHttp] POST:UpdateMyProtrait parameters:mudic success:^(id  _Nonnull responseObject) {
+//      kLog(@"333%@",responseObject);
+         [ShowMessage showTextOnly:[responseObject objectForKey:@"obj"] messageView:self.view];
+         
+         [self.protraitBtn setImage:_selectedImage forState:UIControlStateNormal];
+} failure:^(NSError * _Nonnull error) {
+    kLog(@"5555%@",error);
+}];
+        }else{
+            [ShowMessage showTextOnly:[responseObject objectForKey:@"errorMessage"] messageView:self.view];
+        }
+        
+    } failure:^(NSError * _Nonnull error) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        [ShowMessage showTextOnly:@"提交失败，请重试" messageView:self.view];
+        
+    }];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
    
     
 }

@@ -45,6 +45,13 @@
                                                  kCGBitmapByteOrderDefault | kCGImageAlphaPremultipliedFirst);
 
     // Draw the image into the context and retrieve the new image, which will now have an alpha layer
+    if (!context) {
+        if (unsupportedColorSpace){
+            CGColorSpaceRelease(colorspaceRef);
+        }
+        return image;
+    }
+    
     CGContextDrawImage(context, CGRectMake(0, 0, width, height), imageRef);
     CGImageRef imageRefWithAlpha = CGBitmapContextCreateImage(context);
     UIImage *imageWithAlpha = [UIImage imageWithCGImage:imageRefWithAlpha];

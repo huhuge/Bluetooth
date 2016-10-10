@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DateViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *dateTF;
 
 @end

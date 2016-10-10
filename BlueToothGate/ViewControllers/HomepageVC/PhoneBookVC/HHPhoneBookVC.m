@@ -32,10 +32,28 @@
     
     [self initTabView];
     
+    [self getPhoneNumber];
+    
+    
+}
+
+#pragma mark ---请求---======================================
+- (void)getPhoneNumber{
+    NSMutableDictionary *param = [NSMutableDictionary new];
+    [param setObject:@"36" forKey:@"residentialInfoId"];
+    [[HYHttp sharedHYHttp]POST:GetPhoneBookUrl parameters:param success:^(id  _Nonnull responseObject) {
+        kLog(@"%@",responseObject);
+        [_dataArray addObjectsFromArray:responseObject];
+        kLog(@"%@",_dataArray);
+        [_tableView reloadData];
+    } failure:^(NSError * _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark ---setData---======================================
 - (void)setData{
+    _dataArray = [NSMutableArray new];
     _statusArray = [[NSMutableArray alloc]initWithObjects:@"NO",@"NO",@"NO", nil];
     NSArray *arr1 = @[@1,@2,@3];
     NSArray *arr2 = @[@1,@2];
@@ -50,9 +68,10 @@
     [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([HHPhoneBookCell class]) bundle:nil] forCellReuseIdentifier:@"myCell"];
 }
 
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return 3;
+    return _dataArray.count;
     
 }
 
@@ -66,7 +85,8 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if ([_statusArray[section] isEqualToString:@"YES"]) {
-        NSArray *arr = _sectionArray[section];
+        NSDictionary *dic = _dataArray[section];
+        NSArray *arr = [dic objectForKey:@"children"];
         return arr.count;
     }else{
         return 0;
@@ -74,7 +94,9 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    
+    NSDictionary *secDic = _dataArray[section];
+    NSArray *arr = [secDic objectForKey:@"children"];
+
     UIView *headerView         = [[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenW, 50)];
     headerView.backgroundColor = [UIColor whiteColor];
     
@@ -90,13 +112,13 @@
     UILabel *lab  = [[UILabel alloc]initWithFrame:CGRectMake(25, 10, 100, 30)];
     lab.font      = [UIFont systemFontOfSize:13];
     lab.textColor = [UIColor blackColor];
-    lab.text      = [NSString stringWithFormat:@"第%ld个选项",(long)section];
+    lab.text      = [NSString stringWithFormat:@"%@",[secDic objectForKey:@"text"]];
     [headerView addSubview:lab];
     
     UILabel *lab1  = [[UILabel alloc]initWithFrame:CGRectMake(ScreenW - 50, 10, 50, 30)];
     lab1.font      = [UIFont systemFontOfSize:13];
     lab1.textColor = [UIColor blackColor];
-    lab1.text      = [NSString stringWithFormat:@"%lu/%lu",(unsigned long)[_sectionArray[section] count],(unsigned long)[_sectionArray[section]count]];
+    lab1.text      = [NSString stringWithFormat:@"%lu/%lu",(unsigned long)[arr count],(unsigned long)[arr count]];
     [headerView addSubview:lab1];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -113,12 +135,17 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSDictionary *secDic = _dataArray[indexPath.section];
+    NSArray *arr = [secDic objectForKey:@"children"];
+    NSDictionary *child = arr[indexPath.row];
     
+
     HHPhoneBookCell *cell = [tableView dequeueReusableCellWithIdentifier:@"myCell"];
     if (!cell) {
         cell = [[HHPhoneBookCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"myCell"];
         
     }
+    cell.labPhoneNum.text = [child objectForKey:@"text"];
     
     cell.btnCall.tag = indexPath.section * 1000 + indexPath.row;
     [cell.btnCall addTarget:self action:@selector(callPhone:) forControlEvents:UIControlEventTouchUpInside];
@@ -127,14 +154,37 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    kLog(@"%ld",(long)indexPath.row);
+    kLog(@"%ld----%ld",(long)indexPath.section,indexPath.row);
     
+    UIButton *btn = [UIButton new];
+    btn.tag = indexPath.section * 1000 + indexPath.row;
+    [self callPhone:btn];
 }
 
 
 #pragma mark ---call---======================================
 - (void)callPhone:(UIButton *)sender{
     kLog(@"%ld",(long)sender.tag);
+    
+    NSDictionary *secDic = _dataArray[sender.tag/1000];
+    NSArray *arr = [secDic objectForKey:@"children"];
+    NSDictionary *child = arr[sender.tag%1000];
+    NSString *phoneNumber = [child objectForKey:@"code"];
+    NSString *name = [child objectForKey:@"text"];
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"是否拨打%@电话:\n%@",name,phoneNumber] message:@"" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *ensureAction    = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSString *allString = [NSString stringWithFormat:@"tel:%@",phoneNumber];
+        [[UIApplication sharedApplication]openURL:[NSURL URLWithString:allString]];
+    }];
+    UIAlertAction *cancelAction  = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    }];
+    [alert addAction:ensureAction];
+    [alert addAction:cancelAction];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+   
+    
 }
 
 #pragma mark ---分组展开---======================================
